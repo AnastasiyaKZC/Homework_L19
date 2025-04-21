@@ -11,6 +11,9 @@
 2. Теория
 – Основы тестирования мобильных приложений
 
+
+browserstack - сервис удаленного запуска автотестов на всех платформах
+
 Исходники:
 
 - начальный код из урока https://github.com/yashaka/selene-in-action/tree/py06-lesson-mobile-1-initial
@@ -40,3 +43,5 @@ https://github.com/qa-guru/mobile-tests-13-py/tree/demo-selene-appium-with-brows
   - чтобы работал тот же тест с этой версией апки, вероятно, придется дописать дополнительную опцию (капабилити): 'appWaitActivity': 'org.wikipedia.*'
 
 - Официальные примеры Selene для запуска на разных платформах: https://github.com/yashaka/selene/tree/master/examples
+
+browserstack - сервис удаленного запуска автотестов на всех платформах

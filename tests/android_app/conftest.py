@@ -10,7 +10,7 @@ from selenium import webdriver
 def mobile_management():
     options = UiAutomator2Options().load_capabilities({
         # Specify device and os_version for testing
-        # "platformName": "android",
+        "platformName": "android",
         "platformVersion": "9.0",
         "deviceName": "Google Pixel 3",
 
@@ -29,9 +29,10 @@ def mobile_management():
         }
     })
 
-    # browser.config.driver = webdriver.Remote("http://hub.browserstack.com/wd/hub", options=options)
-    browser.config.driver_remote_url = 'http://hub.browserstack.com/wd/hub'
-    browser.config.driver_options = options
+    browser.config.driver = webdriver.Remote(
+        command_executor='http://hub.browserstack.com/wd/hub',
+        options=options
+    )
 
     browser.config.timeout = float(os.getenv('timeout', '10.0'))
 

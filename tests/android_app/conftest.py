@@ -24,8 +24,8 @@ def mobile_management():
             "sessionName": "BStack first_test",
 
             # Set your access credentials
-            "userName": "iakivkramarenko_qKHOLN",
-            "accessKey": "FSHAmndKHW3XsDkgm5zT"
+            "userName": "bsuser_LmryYP",
+            "accessKey": "6hzz8o9B1TrvKFgSe2py"
         }
     })
 

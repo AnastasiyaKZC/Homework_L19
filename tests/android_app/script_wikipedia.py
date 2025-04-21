@@ -7,7 +7,7 @@ import time
 
 options = UiAutomator2Options().load_capabilities({
     # Specify device and os_version for testing
-    # "platformName": "android",
+    "platformName": "android",
     "platformVersion": "9.0",
     "deviceName": "Google Pixel 3",
 

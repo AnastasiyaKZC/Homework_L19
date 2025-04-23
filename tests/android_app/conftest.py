@@ -2,7 +2,8 @@ import pytest
 from appium.options.android import UiAutomator2Options
 from selene import browser
 import os
-
+import allure
+from allure_commons.types import AttachmentType
 from selenium import webdriver
 
 
@@ -24,8 +25,8 @@ def mobile_management():
             "sessionName": "BStack first_test",
 
             # Set your access credentials
-            "userName": "bsuser_LmryYP",
-            "accessKey": "6hzz8o9B1TrvKFgSe2py"
+            "userName": "iakivkramarenko_qKHOLN",
+            "accessKey": "FSHAmndKHW3XsDkgm5zT"
         }
     })
 
@@ -38,4 +39,22 @@ def mobile_management():
 
     yield
 
+    # Делаем скриншот перед закрытием браузера
+    allure.attach(
+        browser.driver.get_screenshot_as_png(),
+        name="test_finished",
+        attachment_type=AttachmentType.PNG
+    )
+    
     browser.quit()
+
+
+@pytest.fixture
+def make_screenshot():
+    def _make_screenshot(name: str):
+        allure.attach(
+            browser.driver.get_screenshot_as_png(),
+            name=name,
+            attachment_type=AttachmentType.PNG
+        )
+    return _make_screenshot

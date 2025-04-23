@@ -8,7 +8,7 @@ from selenium import webdriver
 
 
 @pytest.fixture(scope='function', autouse=True)
-def mobile_management():
+def mobile_management(request):
     options = UiAutomator2Options().load_capabilities({
         # Specify device and os_version for testing
         "platformName": "android",
@@ -25,8 +25,8 @@ def mobile_management():
             "sessionName": "BStack first_test",
 
             # Set your access credentials
-            "userName": "iakivkramarenko_qKHOLN",
-            "accessKey": "FSHAmndKHW3XsDkgm5zT"
+            "userName": "bsuser_LmryYP",
+            "accessKey": "6hzz8o9B1TrvKFgSe2py"
         }
     })
 
@@ -38,6 +38,14 @@ def mobile_management():
     browser.config.timeout = float(os.getenv('timeout', '10.0'))
 
     yield
+
+    # Получаем статус теста
+    test_status = "passed" if request.node.rep_call.passed else "failed"
+    
+    # Отправляем статус в BrowserStack
+    browser.driver.execute_script(
+        'browserstack_executor: {"action": "setSessionStatus", "arguments": {"status":"' + test_status + '"}}'
+    )
 
     # Делаем скриншот перед закрытием браузера
     allure.attach(
@@ -58,3 +66,10 @@ def make_screenshot():
             attachment_type=AttachmentType.PNG
         )
     return _make_screenshot
+
+
+@pytest.hookimpl(hookwrapper=True, tryfirst=True)
+def pytest_runtest_makereport(item, call):
+    outcome = yield
+    rep = outcome.get_result()
+    setattr(item, f"rep_{rep.when}", rep)
